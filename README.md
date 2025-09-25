@@ -39,15 +39,17 @@ This project demonstrates a full-stack music management system.
 
 - **Purpose:** Allows downloading YouTube songs directly to the Pi Samba folder.
 - **Structure:**
+```
   extension/
-  ├─frontend/
-  ├─manifest.json
-  ├─popup.css
-  ├─popup.html
-  └─popup.js
-  └─backend/
-  ├─backend.py
-  └─ffmpeg.exe
+	  ├─frontend/
+		  ├─manifest.json
+		  ├─popup.css
+		  ├─popup.html
+		  └─popup.js
+	  └─backend/
+		  ├─backend.py
+		  └─ffmpeg.exe
+  ```
 - **Notes:**
   - Frontend communicates with backend via HTTP
   - Backend saves songs to user-specified folder, in this case Samba-shared folder
@@ -56,27 +58,29 @@ This project demonstrates a full-stack music management system.
 
 - **Purpose:** Provides a web interface to browse and play songs stored on the Pi.
 - **Structure:**
+```
   song-player/
-  ├─frontend/
-  ├─src/
-  ├─components/
-  ├─MediaList.css
-  ├─MediaList.jsx
-  ├─MediaPlayer.css
-  ├─MediaPlayer.jsx
-  ├─SearchBar.css
-  └─SearchBar.jsx
-  ├─App.css
-  ├─App.jsx
-  ├─index.css
-  └─main.jsx
-  ├─eslint.config.js
-  ├─index.html
-  ├─package-lock.json
-  ├─package.json
-  └─vite.config.js
-  └─backend/
-  └─backend.py
+	  ├─frontend/
+		  ├─src/
+			  ├─components/
+				  ├─MediaList.css
+				  ├─MediaList.jsx
+				  ├─MediaPlayer.css
+				  ├─MediaPlayer.jsx
+				  ├─SearchBar.css
+				  └─SearchBar.jsx
+			  ├─App.css
+			  ├─App.jsx
+			  ├─index.css
+			  └─main.jsx
+		  ├─eslint.config.js
+		  ├─index.html
+		  ├─package-lock.json
+		  ├─package.json
+		  └─vite.config.js
+	  └─backend/
+		  └─backend.py
+  ```
 - **Notes:**
   - Backend reads from Samba-shared folder
   - Frontend fetches song list and streams audio
