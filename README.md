@@ -11,7 +11,8 @@
 3. [Components](#components)
    - [Extension](#extension)
    - [Song Player](#song-player)
-4. [Technologies Used](#technologies-used)
+1. [Technologies Used](#technologies-used)
+2. [Documentation](#documentation)
 
 ---
 
@@ -29,7 +30,17 @@ This project demonstrates a full-stack music management system.
 
 ## Architecture
 
-[Extension Frontend] --fetch--> [Extension Backend] --writes--> [Pi Samba Folder] --read--> [Song Player Backend] --serves--> [Song Player Frontend]
+```
+[Extension Frontend]
+ ↓ POST
+[Extension Backend] 
+ ↓ Writes
+[Pi Samba Share]
+ ↓ Read
+[Song Player Backend]
+ ↓ API
+[Song Player Frontend]
+```
 
 ---
 
@@ -92,4 +103,15 @@ This project demonstrates a full-stack music management system.
 - Python, Flask
 - React
 - Raspberry Pi
-- Samba (network storage)
+- Samba
+
+---
+
+## Documentation
+
+For a detailed breakdown of the project:
+
+- [00 - Project Overview](docs/00-overview.md)
+- [01 - Chrome Extension](docs/01-chrome-extension.md)
+- [02 - Raspberry Pi](docs/02-raspberry-pi.md)
+- [03 - Song Player](docs/03-song-player.md)
