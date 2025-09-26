@@ -2,7 +2,7 @@
 
 ## Overview
 
-**The Song Player is a web-based music player that provides search, shuffle, and playback of songs stored on the Pi.
+**The Song Player is a web-based music player that provides search, shuffle, and playback of songs stored on the Pi.**
 
 ---
 
