@@ -10,7 +10,7 @@ function App() {
   const [currentSong, setCurrentSong] = useState(null);
 
   useEffect(() => {
-    fetch("BACKEND_IP:5000/api/songs")
+    fetch("/api/songs")
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data.songs)) {

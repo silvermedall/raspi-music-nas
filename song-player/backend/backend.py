@@ -1,5 +1,4 @@
 from flask import Flask, jsonify, request, send_from_directory
-from flask_cors import CORS
 import json
 from datetime import datetime
 import time
@@ -9,7 +8,6 @@ from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 
 app = Flask(__name__)
-CORS(app)
 
 SONG_DIR = "~/music"
 songs = []
@@ -60,7 +58,7 @@ def log_request():
 # Song Refresh
 def refresh_songs():
     global songs
-    songs = sorted([f for f in os.listdir(SONG_DIR) if f.endswith(".mp3")])
+    songs = sorted([f for f in os.listdir(SONG_DIR) if f.lower().endswith(".mp3")])
 
 
 # Watchdog Event Handler
@@ -115,7 +113,7 @@ def get_song(song_id):
 if __name__ == "__main__":
     observer = start_watcher()
     try:
-        app.run(port=5000)
+        app.run(host="127.0.0.1", port=8080)
     finally:
         observer.stop()
         observer.join()

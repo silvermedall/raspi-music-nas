@@ -9,7 +9,7 @@ function MediaPlayer({ currentSong, onSongEnd }) {
 
   useEffect(() => {
     if (currentSong && audioRef.current) {
-      audioRef.current.src = `BACKEND_IP:5000/api/songs/${currentSong.id}`;
+      audioRef.current.src = `/api/songs/${currentSong.id}`;
       audioRef.current
         .play()
         .then(() => setIsPlaying(true))
