@@ -26,7 +26,7 @@
   text-overflow: ellipsis;
 }
 
-.media-player button {
+.play-button {
   padding: 0.5rem 0.75rem;
   border: none;
   background: #1db954;
@@ -36,8 +36,13 @@
   transition: background 0.2s;
 }
 
-.media-player button:hover {
+.play-button:hover {
   background: #17a94c;
+}
+
+.play-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
 }
 
 .media-bottom {

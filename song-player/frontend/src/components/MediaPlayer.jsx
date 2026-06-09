@@ -70,13 +70,17 @@ function MediaPlayer({ currentSong, onSongEnd }) {
     <div className="media-player">
       <div className="media-top">
         {currentSong ? (
-          <span>{currentSong.title}</span>
+          <span>{currentSong.displayTitle || currentSong.title}</span>
         ) : (
           <span>No song selected</span>
         )}
 
-        <button onClick={togglePlayPause} disabled={!currentSong}>
-          {isPlaying ? "⏸ Pause" : "▶ Play"}
+        <button
+          className="play-button"
+          onClick={togglePlayPause}
+          disabled={!currentSong}
+        >
+          {isPlaying ? "Pause" : "Play"}
         </button>
       </div>
       <audio ref={audioRef} />

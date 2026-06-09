@@ -1,23 +1,24 @@
-import { useState } from "react";
 import "./SearchBar.css";
 
-function SearchBar({ onSearch, onShuffle }) {
-  const [query, setQuery] = useState("");
-
+function SearchBar({ query, onSearch, onShuffle }) {
   const handleChange = (e) => {
-    setQuery(e.target.value);
     onSearch(e.target.value);
   };
 
   return (
     <div className="search-bar">
-      <input
-        type="text"
-        placeholder="Search songs..."
-        value={query}
-        onChange={handleChange}
-      />
-      <button onClick={onShuffle}>Shuffle</button>
+      <div className="search-input-wrap">
+        <span aria-hidden="true">Search</span>
+        <input
+          type="text"
+          placeholder="Artist, song, or filename"
+          value={query}
+          onChange={handleChange}
+        />
+      </div>
+      <button className="shuffle-button" onClick={onShuffle}>
+        Shuffle
+      </button>
     </div>
   );
 }

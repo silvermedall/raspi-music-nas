@@ -4,18 +4,33 @@ import MediaList from "./components/MediaList";
 import MediaPlayer from "./components/MediaPlayer";
 import "./App.css";
 
+function cleanSongTitle(title) {
+  return title
+    .replace(/\.mp3$/i, "")
+    .replace(/\s*\[[^\]]*\]\s*/g, " ")
+    .replace(/\s*\([^)]*(official|video|lyric|lyrics|audio|prod\.?)[^)]*\)\s*/gi, " ")
+    .replace(/\s*\|.*$/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 function App() {
   const [songs, setSongs] = useState([]);
   const [filteredSongs, setFilteredSongs] = useState([]);
   const [currentSong, setCurrentSong] = useState(null);
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
     fetch("/api/songs")
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data.songs)) {
-          setSongs(data.songs);
-          setFilteredSongs(data.songs);
+          const normalizedSongs = data.songs.map((song) => ({
+            ...song,
+            displayTitle: cleanSongTitle(song.title),
+          }));
+          setSongs(normalizedSongs);
+          setFilteredSongs(normalizedSongs);
         } else {
           console.error("Unexpected data:", data);
         }
@@ -24,9 +39,17 @@ function App() {
   }, []);
 
   const handleSearch = (query) => {
+    setQuery(query);
+    const normalizedQuery = query.trim().toLowerCase();
+
+    if (!normalizedQuery) {
+      setFilteredSongs(songs);
+      return;
+    }
+
     setFilteredSongs(
       songs.filter((song) =>
-        song.title.toLowerCase().includes(query.toLowerCase())
+        `${song.displayTitle} ${song.title}`.toLowerCase().includes(normalizedQuery)
       )
     );
   };
@@ -50,8 +73,25 @@ function App() {
 
   return (
     <div className="app">
-      <SearchBar onSearch={handleSearch} onShuffle={handleShuffle} />
-      <MediaList songs={filteredSongs} onSelectSong={setCurrentSong} />
+      <header className="app-header">
+        <div>
+          <p className="eyebrow">Naspi Music</p>
+          <h1>Library</h1>
+        </div>
+        <div className="song-count">
+          {filteredSongs.length}/{songs.length}
+        </div>
+      </header>
+      <SearchBar
+        query={query}
+        onSearch={handleSearch}
+        onShuffle={handleShuffle}
+      />
+      <MediaList
+        songs={filteredSongs}
+        currentSong={currentSong}
+        onSelectSong={setCurrentSong}
+      />
       <MediaPlayer currentSong={currentSong} onSongEnd={handleSongEnd} />
     </div>
   );

@@ -12,3 +12,8 @@ html,
   background: #121212;
   color: #eee;
 }
+
+button,
+input {
+  font: inherit;
+}
